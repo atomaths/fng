@@ -1,7 +1,6 @@
 // Copyright 2014 Jongmin Kim. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-
 package main
 
 import (
@@ -9,6 +8,8 @@ import (
 	"fmt"
 	"go/scanner"
 	"os"
+
+	"github.com/atomaths/fng/term"
 )
 
 var (
@@ -33,6 +34,8 @@ func gofmtMain() {
 	for i := 0; i < flag.NArg(); i++ {
 		fmt.Println(flag.Arg(i))
 	}
+
+	fmt.Println(term.Width())
 }
 
 func main() {
