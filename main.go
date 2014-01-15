@@ -13,12 +13,14 @@ import (
 )
 
 var (
-	exitCode = 0
+	exitCode  = 0
 	recursive bool
+	binary    bool
 )
 
 func init() {
-	flag.BoolVar(&recursive, "r", false, "recursive")
+	flag.BoolVar(&recursive, "r", false, "recursive directory search")
+	flag.BoolVar(&binary, "b", false, "binary file search")
 }
 
 func usage() {
@@ -36,9 +38,14 @@ func gofmtMain() {
 	flag.Usage = usage
 	flag.Parse()
 
+	f := new(finder)
+
+	// TODO(atomaths): skip directory or not
 	for i := 0; i < flag.NArg(); i++ {
-		fmt.Println(flag.Arg(i))
+		f.files = append(f.files, flag.Arg(i))
 	}
+
+	fmt.Println(f)
 
 	fmt.Println(term.Width())
 }
