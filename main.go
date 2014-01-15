@@ -14,7 +14,12 @@ import (
 
 var (
 	exitCode = 0
+	recursive bool
 )
+
+func init() {
+	flag.BoolVar(&recursive, "r", false, "recursive")
+}
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "usage: fng [file name patterns...] [match string]\n")
