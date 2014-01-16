@@ -2,24 +2,16 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package term provides current terminal window informations.
+// Package term provides the size and position of the current terminal window.
+// This package supports Linux, Mac and Windows.
 package term
 
-import (
-	"os"
-	"syscall"
-	"unsafe"
-)
-
-const (
-	_TIOCGWINSZ = 0x5413 // On OSX use 1074295912
-)
-
+// A Window contains window's row(height), col(width) pixel size and x, y point.
+// Note that field declaration order is important.(Row, Col following by X, Y)
+// The reason for this is from syscall.Syscall in the NewWindow function.
 type Window struct {
-	Row    uint16
-	Col    uint16
-	Xpixel uint16
-	Ypixel uint16
+	Row, Col uint16
+	X, Y     uint16
 }
 
 var win *Window = nil
@@ -32,27 +24,12 @@ func init() {
 	win = ws
 }
 
-func NewWindow() (*Window, error) {
-	ws := new(Window)
-
-	r1, _, errno := syscall.Syscall(syscall.SYS_IOCTL,
-		uintptr(syscall.Stdin),
-		uintptr(_TIOCGWINSZ),
-		uintptr(unsafe.Pointer(ws)),
-	)
-
-	if errno != 0 || int(r1) == -1 {
-		return nil, os.NewSyscallError("NewWindow", errno)
-	}
-	return ws, nil
-}
-
-// Width returns the window width size.
+// Width returns the window column size.
 func (w *Window) Width() uint16 {
 	return w.Col
 }
 
-// Width returns the window width size for the standard window.
+// Width returns the window column size for the standard window.
 func Width() uint16 {
 	return win.Width()
 }

@@ -2,6 +2,9 @@
 
 The reuslt of fng is easy to see output.
 
+This repository also includes [`term`](http://godoc.org/github.com/atomaths/fng/term)
+package that can get the size of the current terminal window.
+
 ### Installation
 
 ```bash
