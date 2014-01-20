@@ -2,21 +2,28 @@
 
 The reuslt of fng is easy to see output.
 
-This repository also includes [`term`](http://godoc.org/github.com/atomaths/fng/term)
-package that can get the size of the current terminal window.
+This repository also includes [`term`](http://godoc.org/github.com/atomaths/fng/pkg/term),
+[`find`](http://godoc.org/github.com/atomaths/fng/pkg/find) and
+[`grep`](http://godoc.org/github.com/atomaths/fng/pkg/grep) packages
+that may be useful to other hackers.
+
 
 ### Installation
 
-```bash
-$ go get github.com/atomaths/fng
-```
+#### Install from source
+
+    $ go get github.com/atomaths/fng
+
+#### Install from binary
+
+Link...
+
 
 ### Usage
 
-```bash
-$ fng *.go string_to_find
-$ fng *.go *.c "string to find"
-```
+    $ fng pattern *
+    $ fng "string_to_find" *.c *.h
+
 
 ### API reference
 [godoc.org/github.com/atomaths/fng](http://godoc.org/github.com/atomaths/fng)
