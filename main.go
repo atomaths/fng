@@ -9,22 +9,26 @@ import (
 	"go/scanner"
 	"os"
 
-	"github.com/atomaths/fng/term"
+	"github.com/atomaths/fng/pkg/term"
 )
 
 var (
-	exitCode  = 0
-	recursive bool
-	binary    bool
+	exitCode   = 0
+	recursive  bool
+	binary     bool
+	ignoreCase bool
+	word       bool
 )
 
 func init() {
 	flag.BoolVar(&recursive, "r", false, "recursive directory search")
 	flag.BoolVar(&binary, "b", false, "binary file search")
+	flag.BoolVar(&ignoreCase, "i", false, "ignore case distinctions")
+	flag.BoolVar(&word, "w", false, "force PATTERN to match only whole words")
 }
 
 func usage() {
-	fmt.Fprintf(os.Stderr, "usage: fng [pattern] [file name patterns...]\n")
+	fmt.Fprintf(os.Stderr, "Usage: fng [OPTION]... PATTERN [FILE]...\n")
 	flag.PrintDefaults()
 	os.Exit(2)
 }
