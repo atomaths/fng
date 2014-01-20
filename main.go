@@ -24,7 +24,7 @@ func init() {
 }
 
 func usage() {
-	fmt.Fprintf(os.Stderr, "usage: fng [file name patterns...] [match string]\n")
+	fmt.Fprintf(os.Stderr, "usage: fng [pattern] [file name patterns...]\n")
 	flag.PrintDefaults()
 	os.Exit(2)
 }
